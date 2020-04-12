@@ -36,7 +36,7 @@ spec:
           value: http://daytrader-quotes
         - name: GET_HOSTS_FROM
           value: dns
-        image: krishnamkapoor/daytrader-portfolios:4.0.18
+        image: krishnam007/daytrader-portfolios:4.0.18
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 4

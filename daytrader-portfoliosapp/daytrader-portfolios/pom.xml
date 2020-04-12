@@ -355,7 +355,7 @@
   			<id>kubernetes</id>
   			<properties>
   				<!-- <daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder> -->
-				<docker.image.prefix>krishnamkapoor</docker.image.prefix>
+				<docker.image.prefix>krishnam007</docker.image.prefix>
 				<dockerfile-maven-version>1.4.0</dockerfile-maven-version>	
 
                 <!-- <daytraderKeystoreFolder>${project.basedir}/src/main/resources/external/ssl</daytraderKeystoreFolder> -->

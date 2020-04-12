@@ -5,8 +5,8 @@ FROM openjdk:8-jre
 ##
 ##  Sets the author field of the generated image
 ##
-MAINTAINER Donald Vines <donald_vines@hotmail.com>
-##
+# MAINTAINER Donald Vines <donald_vines@hotmail.com>
+# ##
 ##  Declare Docker ARGs whose values are set when building the image; but they are not available to the container
 ##
 ##  1.  App/WAR Name & Version
@@ -24,10 +24,10 @@ ARG DATABASE_PASSWORD
 ##  Set Docker ENV Values that are not only available when building the image, but also to the running container
 ##
 ##  1. SSL Variables
-ENV DAYTRADER_KEYSTORE_FILENAME=/var/ssl/daytrader/keystore.jks
-ENV DAYTRADER_KEYSTORE_PASSWORD=password
-ENV DAYTRADER_TRUSTSTORE_LOCATION=/var/ssl/daytrader/truststore.jks
-ENV DAYTRADER_TRUSTSTORE_PASSWORD=password
+# ENV DAYTRADER_KEYSTORE_FILENAME=/var/ssl/daytrader/keystore.jks
+# ENV DAYTRADER_KEYSTORE_PASSWORD=password
+# ENV DAYTRADER_TRUSTSTORE_LOCATION=/var/ssl/daytrader/truststore.jks
+# ENV DAYTRADER_TRUSTSTORE_PASSWORD=password
 ##  2.  Database Variables
 ENV DAYTRADER_DATABASE_DRIVER=${DATABASE_DRIVER}
 ENV DAYTRADER_DATABASE_URL=${DATABASE_URL}
@@ -55,19 +55,20 @@ RUN mkdir -p -m 0777 /var/log/daytrader
 RUN touch $DAYTRADER_LOG_FILENAME
 RUN chmod 666 $DAYTRADER_LOG_FILENAME
 ##  3.  Create SSL Folder, Add Truststore, & Set Permissions
-RUN mkdir -p -m 0777 /var/ssl/daytrader
-ARG JKS_FILE=target/${WAR_ARTIFACTID}-${APP_VERSION}/WEB-INF/classes/truststore.jks
-ADD ${JKS_FILE} $DAYTRADER_TRUSTSTORE_LOCATION
-RUN chmod 666 $DAYTRADER_TRUSTSTORE_LOCATION
+# RUN mkdir -p -m 0777 /var/ssl/daytrader
+# ARG JKS_FILE=target/${WAR_ARTIFACTID}-${APP_VERSION}/WEB-INF/classes/truststore.jks
+# ADD ${JKS_FILE} $DAYTRADER_TRUSTSTORE_LOCATION
+# RUN chmod 666 $DAYTRADER_TRUSTSTORE_LOCATION
 ##  4.  Inform Docker that the container listens on the specified port
 EXPOSE ${EXPOSE_PORT}
 ##
 ##  Run the application in the container
 ##
 ##  1.  Setup the JAVA_OPTS for the application
-ENV JAVA_OPTS="-Djavax.net.ssl.trustStore=/var/ssl/daytrader/truststore.jks -Djavax.net.ssl.trustStorePassword=password"
+# ENV JAVA_OPTS="-Djavax.net.ssl.trustStore=/var/ssl/daytrader/truststore.jks -Djavax.net.ssl.trustStorePassword=password"
 ##  2.  Add the WAR to the container 
 ARG WAR_FILE=target/${WAR_ARTIFACTID}-${APP_VERSION}.war
 ADD ${WAR_FILE} app.war
 ##  3.  Start the executable WAR
-ENTRYPOINT exec java $JAVA_OPTS -jar app.war
+# ENTRYPOINT exec java $JAVA_OPTS -jar app.war
+ENTRYPOINT exec java -jar app.war
